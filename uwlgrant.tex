@@ -1,0 +1,233 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{calc}
+\usepackage{setspace}
+\usepackage{multicol}
+\usepackage{fancyheadings}
+
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{rotating}
+\usepackage{harvard}
+\usepackage{aer}
+\usepackage{aertt}
+\usepackage{verbatim}
+
+\setlength{\voffset}{-0.25in}
+\setlength{\topmargin}{0pt}
+\setlength{\hoffset}{-0.1in}
+\setlength{\oddsidemargin}{0pt}
+\setlength{\headheight}{0pt}
+\setlength{\headsep}{0in}
+\setlength{\marginparsep}{0pt}
+\setlength{\marginparwidth}{0pt}
+\setlength{\marginparpush}{0pt}
+\setlength{\footskip}{.3in}
+\setlength{\textwidth}{6.7in}
+\setlength{\textheight}{9.5in}
+\setlength{\parskip}{0pc}
+
+\renewcommand{\baselinestretch}{1.6}
+
+\newcommand{\bi}{
+  \begin{itemize}
+  \setlength{\itemsep}{0pt}
+  \setlength{\parskip}{0pt}
+}
+\newcommand{\ei}{\end{itemize}}
+\newcommand{\be}{
+  \begin{enumerate}
+  \setlength{\itemsep}{0pt}
+  \setlength{\parskip}{0pt}
+}
+\newcommand{\ee}{\end{enumerate}}
+\newcommand{\bd}{\begin{description}}
+\newcommand{\ed}{\end{description}}
+\newcommand{\prbf}[1]{\textbf{#1}}
+\newcommand{\prit}[1]{\textit{#1}}
+\newcommand{\beq}{\begin{equation}}
+\newcommand{\eeq}{\end{equation}}
+\newcommand{\bdm}{\begin{displaymath}}
+\newcommand{\edm}{\end{displaymath}}
+\newcommand{\script}[1]{\begin{cal}#1\end{cal}}
+\newcommand{\citee}[1]{\citename{#1} (\citeyear{#1})}
+\newcommand{\h}[1]{\hat{#1}}
+\newcommand{\ds}{\displaystyle}
+
+\newcommand{\toprule}{\par\vspace*{2pt}\noindent{\hrule\hfill}\par\vspace*{1pt}}
+
+\newcommand{\app}
+{
+\appendix
+}
+
+\newcommand{\appsection}[1]
+{
+\let\oldthesection\thesection
+\renewcommand{\thesection}{Appendix \oldthesection}
+\section{#1}\let\thesection\oldthesection
+\renewcommand{\theequation}{\thesection\arabic{equation}}
+\setcounter{equation}{0}
+}
+
+\pagestyle{plain}
+
+\begin{document}
+\setcounter{page}{1}
+
+\title{Labor Markets and Adaptive Expectations: Estimating a New Keynesian Model with Learning and Unemployment}
+\author{James Murray}
+
+\begin{comment}
+\maketitle
+\abstract{The purpose of this research project is to investigate the effect adaptive expectations can have on unemployment.  One of the primary purposes of the literature in applied macroeconometrics is to formulate mathematical models of countries' economies, then estimate these models to uncover causes for business cycle fluctuations, which includes recessions, expansions, price inflation, and changes in aggregate employment.  The most popular modeling strategy is to set up a framework for consumer decisions, business decisions, and economic policy where all economic agents (consumers, businesses, and policy makers) have rational expectations.  Expectations can crucially determine the path a country's economy takes; low confidence on its own can bring about an economic downturn.  As important as expectations can be, the rational expectations assumption does not allow for expectations to have negative effects on the economy.  Instead, it assumes agents fully understand the functioning of the economy, and it allows agents to optimally respond to economic shocks, thus mitigating the effects economic shocks have on the business cycle.  I will instead contribute to a literature on adaptive expectations which allows for expectations to cause and/or exacerbate business cycle fluctuations.  The second most popular assumption in the macroeconometrics literature is to assume unemployment does not exist, because modeling labor markets away from equilibrium brings up another modeling complication.  Until only very recently, the macroeconometrics literature has not attempted to explain unemployment cycles along with business cycles.  The purpose of this paper is to build on this new unemployment literature by estimating how important expectations have been in creating unemployment episodes in recent U.S. history.}
+\end{comment}
+
+\section{Purpose / Significance of Research}
+The purpose of this research project is to investigate the effect adaptive expectations has on unemployment in the United States economy.  This paper will contribute to a literature that estimates mathematical models of the economy\footnote{Specifically, dynamic stochastic general equilibrium (DSGE) models of the economy.  These are mathematical frameworks that model consumers' decisions to spend, save, and work; businesses decisions on how much of final goods and services to produce, how many workers to hire, and what prices to set; and often government policy makers' decisions for setting interest rates (monetary policy) and setting taxes and government spending (fiscal policy).  These models are general equilibrium models, which means the equilibrium values of macroeconomic variables such as employment, total production, price inflation, and interest rates are solved for so that the behavior of these variables is consistent with the behavior specified for consumers, businesses, and government policy.  These models also include stochastic 'shocks,' which are used to model events such as changes in demand, changes in costs, or changes in technology that can alter market conditions.  These models are dynamic, which means they predict the evolution of macroeconomic variables over time.  Finally these models specify a framework for which consumers, businesses, and governments form expectations about the future outcome for important macroeconomic variables.} for the purpose of identifying what causes business cycle fluctuations, including recessions, expansions, and inflation episodes; and what government policy can do to promote a stable, healthy economy.  My research differs from the majority of this literature on two dimensions: 1) I examine how consumers', businesses' and policy makers' expectations can generate economic fluctuations by allowing for adaptive expectations, and 2) I use a model which explains how the unemployment rate evolves, which strange as it may seem, is very rare in this literature, and has only been recently introduced by \citee{blanchard_gali2010}.
+
+\subsection{Adaptive Expectations}
+Adaptive expectations is a framework for modeling the way that consumers, businesses, and policy makers form their expectations about future outcomes for economic variables including income, sales volume, prices, and employment.  The state of expectations can crucially impact the direction a country's economy takes, whether these expectations are well-guided or not.  Suppose, for example, that consumers expect lower income or a higher chance of becoming unemployed in the future.  In the present, consumers will increase how much they save as a precautionary measure, and therefore they decrease their spending on final goods and services.  Lower demand for final goods and services causes lower revenue for businesses, and they respond by decreasing production, reducing employment, and lowering prices and wages to the extent possible.  Such a negative shock to consumers' expectations can have a self-fulfilling prophesy, causing higher unemployment and lower levels of aggregate income, putting an economy into recession.
+
+The most common way expectations are modeled in the macroeconomics literature is to simply assume expectations are rational.  This implies that all economic agents (consumers, businesses, and policy makers) fully understand the behavior of all other economic agents, down to specific values for all consumers' incomes, all businesses' costs and sales, and specific values for parameters governing consumers' preferences to save, the flexibility businesses have to alter prices and change inputs in their production process, and the behavior of the government in setting economic policy.  Uncertainty still exists in that agents cannot perfectly predict future shocks that might affect the economy.  Common shocks considered in the macroeconometrics literature include shocks to businesses costs of production, shocks to technology which alters the productivity of workers, and shocks to consumers' preferences to save versus consume, just to name a few of the most popular.  Agents with rational expectations may not know the precise value these shocks will take in the future, but they are assumed to have enough information about the probabilistic nature of the shocks to make reliable forecasts using simple probability techniques.  
+
+Rational expectations rules out the possibility that a change in expectations can bring about an economic downturn as described in the first paragraph of this subsection.  The economy may still take a downward turn if hit by one of the aforementioned fundamental shocks, such as a shock which increases costs for businesses.  While this shock might trigger an economic downturn, rational expectations allow agents to react optimally, mitigating the effect the adverse shock has on the economy, and allowing for a relatively quick recovery.  Rational expectations supposes an extremely high level of information available to all economic agents, and an amazing informational processing ability that allows all economic agents to make expectations fully consistent with the manner in which the economy functions.  Despite these clearly unrealistic assumptions, rational expectations is the most common assumption in the macroeconomics literature, as it provides a convenient framework to solve and estimate macroeconomic models.  These models have been used to understand the role various shocks have had in causing economic recessions and they provide a convenient framework for determining the effectiveness of government policy for regulating the economy.\footnote{There have been literally hundreds of papers that use estimated rational expectations models to explain macroeconomic behavior.  A sampling of notable contributions include \citee{ireland_tech_2004} and \citee{smetswouters2007} who both estimate rational expectations models of the economy to explain United States business cycle fluctuations.  \citee{smetswouters2003} estimate a similar model to understand business cycle fluctuations in Europe.  \citee{smetswouters2005} estimate such a model to compare the experiences of the Euro area and the United States.  More recently \citee{ireland_greatrecession_2011} estimates such a model to explain the economic downturn in the United States beginning in 2007 and continuing to the present, the most severe economic downturn since the great depression.  Coenen et. al. (2010) use models like these to examine how effectively government policy can stimulate the economy to combat the current economic downturn in the United States.}
+
+Adaptive expectations is an alternative framework for modeling expectations that does not impose the extreme informational requirements on economic agents that rational expectations does, and it allows for the possibility that expectations can have a role in creating or exacerbating business cycle fluctuations.  The specific type of adaptive expectations considered in this paper is called least-squares learning.  With least-squares learning, the information agents have is very realistic, it includes only past data on macroeconomic variables such as gross domestic product (total quantity of production in the economy), inflation, and interest rates, all of which are common variables used for statistical economic forecasting and are freely available to download for the United States from a number of government-sponsored websites.  Secondly, the informational processing for least-squares learning is also very realistic.  Agents form expectations by estimating least-squares regression models using past data, a common and fast statistical forecasting technique, a method that is commonly taught in elementary level college statistics classes and used by professional macroeconomic forecasters alike.
+
+It has been shown that least-squares learning can explain actual business cycle fluctuations in the Unites States where rational expectations models fall short.  \citee{eusepi_preston_2011} show that least-squares learning causes prolonged periods of business cycle downturns and business cycle bubbles, causing more business cycle volatility.  \citee{ow2005} demonstrate it is possible for least-squares learning to lead to prolonged periods of inflation, as compared to rational expectations, following a relatively small inflationary shock.  \citee{ow2005b} demonstrate the significance for the United States when they show that least-squares learning can explain the run up of inflation and economic volatility in the 1970s and early 1980s.  \citee{primiceri2006} demonstrates this and further demonstrates that learning explains the subsequent period of low inflation and relative stability beginning in the early 1980s and continuing until the most recent recession.  \citee{milani2011} uses a least-squares learning framework with shocks to expectations (independent of other shocks in the economy such as shocks to demand, costs, technology, etc) and shows that volatility in expectations is a significant source for economic volatility in the United States since World War II.  \citee{slobodyan_wouters_2009} find that least-squares learning models more accurately explain macroeconomic data for the United States than rational expectations model.
+
+These papers all explore different aspects of business cycles in the United States, but a general consensus in the learning literature is that least-squares learning models provide many insights into business cycle fluctuations that rational expectations does not.  Missing from all these papers though is an explanation for how expectations affect unemployment dynamics throughout the business cycle.  As I mentioned above, until only very recently, the macroeconometrics literature has avoided speaking to issues concerning unemployment for mathematical convenience.  The mathematical models of the economy used in the literature implicitly assume unemployment does not exist.\footnote{Changes in total employment are still allowed, but it assumes workers voluntarily leave employment as wages fall.}
+
+\subsection{Unemployment}
+\citee{blanchard_gali2010} are among the first authors\footnote{Working papers on this topic began to surface in 2007, with papers published since then.  A working paper version of \citee{blanchard_gali2010} was among these first contributions.} to explicitly model unemployment into common mathematical models of the economy which are widely used to explain business cycle fluctuations and evaluate optimal\footnote{Various criteria exist in the literature for ``optimal'' monetary policy, but a common measure is monetary policy which provides the most stable path for inflation and production through the business cycle.} conduct for fiscal policy (setting taxes and government spending) and monetary policy (setting interest rates).  \citename{blanchard_gali2010} show that when unemployment is considered, monetary policy faces an unfortunate trade-off between inflation stability and unemployment stability.  \citee{thomas2008} demonstrates that the presence of unemployment calls for an optimal monetary policy with higher level for long-run inflation than when failing to model unemployment.
+  \citee{gst2008} show that these models with unemployment better explain all macroeconomic variables considered, including inflation, production, and employment.  \citee{gsw2010} also show that including unemployment in these models helps to more accurately estimate the parameters of the models.
+
+These papers on unemployment have pioneered a new branch in the macroeconometrics literature where there is still much more work to be done.  Significant work has been made on considerations for optimal monetary policy, but there is still much to explore considering the implications for business cycle fluctuations.  The contribution I intend to make is to determine the role expectations has on unemployment throughout the business cycle, and how the inclusion of unemployment changes the explanation for fluctuations in other economic variables, including production and inflation.  
+
+\subsection{Significance of this Research Project}
+This research project has significance to macroeconometric literature, to economic policy, and to me personally to develop a successful and focused research program:
+
+\bi
+\item \textbf{Macroeconometrics literature:}  This work will importantly contribute to the two branches of the macroeconomics literature I describe in the previous subsection: 1) literature on expectations and business cycles and 2) literature on economic modeling using unemployment. 
+\item \textbf{Economic policy:}  The United States has been plagued with persistently high unemployment since the height of the ``Great Recession'' in mid-2008.   The expectations literature has shown that, among other business-cycle characteristics, least-squares learning helps explain prolonged periods of economic downturn.  I expect least-squares learning will also help explain prolonged periods of unemployment like the one the United States is currently facing.  One of the outcomes from the paper will be an estimated learning model which can be used to evaluate how effectively government policy can reduce the unemployment rate, while trying to boost the economy as a whole.
+\item \textbf{Personal research program:}  This work continues on the field I did my doctoral research: exploring the role expectations have on business cycle dynamics by estimating mathematical models of the United States economy.  In Summer 2011, I started another paper in this field which demonstrates how least-squares learning can lead to a situation in which the same size shock can have different effects on the economy, depending on the state of expectations.  This can help explain why some recessions have been more severe than others, while the shocks that led to each recession may not be so different.  The least-squares learning framework also demonstrates that the same type of government stimulus may be effective during some recessions, but less effective in others, again depending on the state of expectations, and specifically expectations on future economic policy.  The present work on least-squares learning and unemployment will complement this work quite well.  I expect my work on both of these papers will lead to another paper that combines these ideas: explaining why sometimes government stimulus policy has been effective in reducing unemployment in some situations, but has not in others (such as the present-day economic situation).  In short, this project will help jump-start a research agenda for which I am knowledgeable and passionate about, and which holds promise for future research productivity.
+\ei
+
+\section{Objectives}
+The outcome of this research project will be answers to the following questions:
+\be
+\item Does the way in which expectations are formed influence how long periods of unemployment last, and how deep the unemployment problem becomes?
+\item Do expectations help explain why some U.S. recessions are characterized by brief periods of unemployment, while others are characterized by long-periods of unemployment?
+\item Can government policy effectively reduce unemployment?  Under what conditions for expectations is this more likely?  In what periods of U.S. history was this more feasible?
+\item What economic shocks are responsible for U.S. business cycle fluctuations, when allowing for a model with unemployment and adaptive expectations in a mathematical model of the U.S. economy?  Neither extension is typical in the macroeconometrics literature, and both of these have not been previously considered simultaneously.
+\ee
+
+The final goal is to produce a published paper in a peer-reviewed, highly-regarded, field journal.  Possible publication outlets include: \textit{Macroeconomic Dynamics}, \textit{Journal of Economic Dynamics and Control}, \textit{Studies in Nonlinear Dynamics and Econometrics}, \textit{B.E. Journal of Macroeconomics}, \textit{Quantitative Economics}, and \textit{Journal of Macroeconomics}.
+
+\section{Methodology}
+I will use quarterly U.S. data on real GDP (a measure of the total value of production in the economy), price inflation, the Federal Funds interest rate, and the unemployment rate from 1954:Q3 through 2010:Q4, the maximum date range for which data is available.  This data is freely available for download from the St. Louis Federal Reserve Economic Database.  
+
+I will create a mathematical model of the U.S. economy which specifies the behavior of consumers' decisions to save, spend, and work; producers' decisions for how much final goods to produce, what prices to set, and what level of employment to hire; and monetary policy's decision for how to set interest rates in order to encourage maximum stability in production, inflation, and unemployment.  This model will include adaptive expectations, in the fashion used by \citee{eusepi_preston_2011}, among others; and a framework for unemployment, in the fashion used by \citee{blanchard_gali2010}.  To estimate the model, I will employ the method most commonly used in this literature, which is a Bayesian Markov-Chain Monte Carlo simulation method (see, for example \citee{smetswouters2007}).
+
+In order to answer what role expectations have in explaining unemployment dynamics, I will also estimate a model with rational expectations, the most common expectations framework used in the applied macroeconometrics literature.  I can then compare the explanations for business cycles that each of the two models suggests, and compare how accurately each model explains U.S. data.
+
+This work involves designing the mathematical model of the economy, writing a computer program to solve the model and estimate its parameters, and manipulating the model to reveal its predictions.  I aim to complete these steps and the remaining steps of the research project according to the following schedule:
+
+\be
+\item Develop the mathematical model of the economy. \\
+\textit{Time frame:} Complete by early summer 2012.
+\item Write computer programs in C (C is a computer programming language) that solve and simulate the model, and can be used to estimate models.  I have previous experience successfully creating similar programs for similar models used in my existing working papers (see bibliography).\\
+\textit{Time frame:} Complete by end of summer 2012.
+\item Write introduction, literature review, and motivation for the paper.\\
+\textit{Time frame:} Complete by early Fall 2012.
+\item Use computer models to generate results, and include these results, descriptions, and conclusions in the paper.  At this point, all the analysis needed for the paper will be complete and I will have the first complete draft of the working paper.\\
+\textit{Time frame:} Complete by end of Fall 2012. 
+\item Circulate paper in working paper series sponsored by SSRN (Social Science Research Network) and the Midwest Economics Association (MEA) 2013 annual conference.  Over the past few years I have organized and participated in sessions on macroeconometrics for the MEA annual conference, and I plan to do the same for the 2013 conference.  \\
+\textit{Time frame:} Complete by March 2013.
+\item Consider feedback from the paper and submit it for publication by the beginning of Summer 2013.
+\ee
+
+\newpage
+%\begin{singlespace}
+\nocite{*}
+\bibliographystyle{econometrica}
+\bibliography{unemployment.bib}
+%\end{singlespace}
+ \newpage
+
+\begin{center} 
+\textbf{\Large{James Murray}}\\
+\textbf{Curriculum Vitae (Abbreviated)}\\
+\textbf{(Updated \today)}\end{center}
+\small 
+
+\noindent \textbf{Contact Information} \toprule
+\hspace*{-0.5pc}\begin{tabular}{p{3.4in} p{3in}}
+University of Wisconsin - La Crosse\newline
+Department of Economics \newline
+1725 State St. \newline
+La Crosse, WI  54601
+&
+Phone (office and mobile): (608)406-4068\newline
+E-mail: \texttt{jmurray@uwlax.edu}\newline
+Web: \texttt{http://www.murraylax.org}
+\end{tabular} \\ \\
+
+\noindent \textbf{Education} \toprule
+\hspace*{-0.5pc}\begin{tabular}{p{.5in} p{.6in} p{2.5in} p{2in}}
+Ph.D. & Economics, & Indiana University & September 2008 \\
+M.A. & Economics, & Indiana University & May 2004  \\
+M.A. & Economics, & University of Notre Dame & May 2002 \\
+B.S. & Economics, & University of Wisconsin - La Crosse & May 2000 \\
+\end{tabular} \\ \\
+
+\noindent \textbf{Employment} \toprule
+\hspace*{-0.5pc}\begin{tabular}{p{1.5in} p{1.7in} p{1.5in}}
+Assistant Professor & U. Wisconsin La Crosse & 8/2009 - present \\
+Assistant Professor & Viterbo University & 8/2008 - 5/2009 \\
+Teaching Fellow & IUPU - Columbus & 8/2007 - 5/2008 \\
+Adjunct Professor & Viterbo University & 5/2006 - 8/2007 \\
+Associate Instructor & Indiana University & 9/2003 - 5/2007 \\
+Adjunct Professor & Ivy Tech State College & 3/2004 - 8/2004 \\
+\end{tabular} \\ \\
+
+\noindent \textbf{Publications} \toprule
+\bd
+\item ``Regime Switching and Wages in Major League Baseball under the Reserve Clause,'' with Michael Haupert, (\textit{forthcoming}, 2012), \textit{Cliometrica}, 6(2).
+\item ``Channels for Improved Performance From Living on Campus,'' with Pedro de Araujo, (2010), \textit{American Journal of Business Education}, 3(12): pp. 57-64.
+\item ``Estimating the Effects of Dormitory Living on Student Performance,'' with Pedro de Araujo, (2010), \textit{Economics Bulletin}, 30(1): pp. 866-878.
+\item ``Shirking in Major League Baseball in the Era of the Reserve Clause,'' with Glenn Knowles, Michael Haupert, and Keith Sherony, (2001), \textit{Nine: A Journal of Baseball History and Social Policy Perspectives,}  Volume 9. \\
+\ed
+
+\newpage
+\noindent \textbf{Working Papers} \toprule
+\bd
+\item ``Fiscal and Expenditure Multipliers with Adaptive Expectations''
+\item ``Learning with Judgment Shocks in the New Keynesian Model''
+\item ``Regime Switching, Learning, and the Great Moderation'' 
+\item ``Dynamics of Monetary Policy Uncertainty and the Impact on the Macroeconomy'' with Nicholas Herro, under review at \textit{Economics Bulletin}.
+\item ``A Life Insurance Deterrent to Risky Behavior in Africa'' with Pedro de Araujo, under revision for \textit{B.E. Journal of Economic Analysis \& Policy}. 
+\ed
+
+\noindent \textbf{Non-Refereed Publications} \toprule
+\bd
+\item ``Of Mice and Men: Using a Book Club to Improve Teaching and Learning,'' with Kathryn Birkeland, Betsy Knowles, and Laurie Strangman, \textit{The Teaching Professor}, December 2010.
+\item ``Expectations for Monetary Policy,'' \textit{Business Connection,}  April 2008. \\ 
+\ed
+
+\noindent \textbf{Grants and Awards} \toprule
+\bd
+\item University of Wisconsin - La Crosse, College of Business Administration Research Grant for project, ``Fiscal and Expenditure Multipliers with Adaptive Expectations,'' Summer 2011.
+\item University of Wisconsin - La Crosse Lesson Study Grant for project, ``Lesson Study: Developing Students' Thought Processes For Choosing Appropriate Statistical Methods,'' Summer 2011.
+\item University of Wisconsin - La Crosse Online Education Grant to develop an online course for ECO 120: Global Macroeconomics. November 2010.
+\item University of Wisconsin - La Crosse Faculty Research Grant, ``Academic Benefits of Living on Campus: A look at Peer Influences and Utilization of University Provided Resources,'' July 2010 - June 2011. 
+\item Jordan River Conference Best Graduate Student Paper Award, Indiana University, April 2007. 
+\item Future Faculty Teaching Fellowship, Indiana University, 2007. \\ \\
+\ed
+
+\noindent \textbf{References available upon request.} \toprule
+\end{document}
+
+
+

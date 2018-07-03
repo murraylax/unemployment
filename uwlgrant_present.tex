@@ -1,0 +1,210 @@
+\documentclass{beamer}
+\usepackage{beamerthemeshadow}
+\usepackage{verbatim}
+
+\usepackage{lastpage}
+\usepackage{xcolor}
+\usepackage{pgf}
+\usepackage{colortbl}
+\usepackage{hyperref}
+
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+\newcommand{\be}{\begin{enumerate}}
+\newcommand{\ee}{\end{enumerate}}
+\newcommand{\bd}{\begin{description}}
+\newcommand{\ed}{\end{description}}
+\newcommand{\prbf}[1]{\textbf{#1}}
+\newcommand{\prit}[1]{\textit{#1}}
+\newcommand{\beq}{\begin{equation}}
+\newcommand{\eeq}{\end{equation}}
+\newcommand{\bdm}{\begin{displaymath}}
+\newcommand{\edm}{\end{displaymath}}
+
+\newcommand{\ft}[1]{
+  \frametitle{\begin{tabular}{p{4.2in}r} \textcolor{white}{#1} & \small{\insertframenumber / \inserttotalframenumber} \end{tabular}}
+  \setbeamercovered{transparent=18}
+}
+
+\newcommand{\eft}[1]{
+  \frametitle{\begin{tabular}{p{4in}r} \textcolor{white}{#1} & \small{\hyperlink{f:questions}{\beamergotobutton{GO BACK}}} \end{tabular}}
+  \setbeamercovered{transparent=18}
+}
+
+\newcommand{\stepinv}{\setbeamercovered{invisible}}
+\newcommand{\stopinv}{\setbeamercovered{transparent=18}}
+\newcommand{\uncoverinv}[1]
+{
+  \setbeamercovered{invisible}
+  \uncover<+->{#1}
+  \setbeamercovered{transparent=18}
+}
+\newcommand{\ans}[1]{\textcolor{blue}{#1}}
+\newcommand{\ansinv}[1]
+{
+  \setbeamercovered{invisible}
+  \uncover<+->{\textcolor{blue}{#1}}
+  \setbeamercovered{transparent=18}
+}
+\newcommand{\setinv}{\setbeamercovered{invisible}}
+\newcommand{\setvis}{\setbeamercovered{transparent=18}}
+\newcommand{\centerpic}[2]
+{
+  \begin{center}
+  \includegraphics[#1]{#2}
+  \end{center}
+}
+\newcommand{\h}[1]{\hat{#1}}
+\newcommand{\ds}{\displaystyle}
+
+%\definecolor{light}{rgb}{1.0,0.33,0.33}
+\definecolor{light}{rgb}{1.0,0.5,0.5}
+\newcommand{\hl}[1]{\alt<#1>{\rowcolor{light}\hspace*{-2.1pt}} {\hspace*{-2.1pt}} }
+
+\definecolor{mycolor}{rgb}{0.6,0.0,0.0}
+\usecolortheme[named=mycolor]{structure}
+
+\title[Labor Markets and Adaptive Expectations]{Labor Markets and Adaptive Expectations:}
+\subtitle{Estimating a New Keynesian Model with Learning and Unemployment}
+\author[James Murray, Department of Economics]{James Murray\\Department of Economics\\University of Wisconsin - La Crosse}
+\date{November 16, 2011}
+
+\begin{document}
+
+\frame{\titlepage \setcounter{framenumber}{0}}
+
+\section{Purpose and Outcomes}
+\frame
+{
+  \ft{Research Project Purpose and Outcomes}
+  \uncover<+->{
+  \begin{block}{Purpose}
+  Estimate the effects adaptive expectations have on unemployment dynamics in the United States.
+  \end{block}
+  }
+
+  \uncover<+->{
+  \begin{block}{Outcome: Answers to the following questions}
+    \be
+    \item<+-> Do expectations influence how long unemployment lasts, and how severe the unemployment problem becomes?
+    \item<+-> Do expectations help explain why some unemployment episodes are brief, while others are long?
+    \item<+-> Can government policy effectively reduce unemployment?  Under what conditions is this more likely?   
+    \item<+-> What economic shocks are responsible for U.S. business cycle fluctuations?  
+    \ee
+  \end{block}
+  }
+}
+
+\section{Expectations}
+\subsection{Example}
+\frame
+{
+  \ft{Expectations}
+  \uncover<+->{
+  \begin{block}{Example of Destabilizing Effect of Expectations}
+    \be
+    \item<+-> Suppose consumers expect unemployment rate to rise.
+    \item<+-> As a precautionary measure, many consumers save more, spend less.
+    \item<+-> Lower spending leads to lower sales, revenues, profits.
+    \item<+-> Businesses cut production, cut employees
+    \item<+-> Unemployment does rise (expectations self-fulfilling, destabilizing)
+    \ee
+  \end{block}
+  }
+
+  \uncover<+->{
+  \begin{block}{Expectation Frameworks}
+    \bi
+    \item<.-> I will use least-squares learning (adaptive expectations)
+    \item<.-> Rational expectations is the typical framework in the macroeconomics literature.
+    \ei
+  \end{block}
+  }
+}
+
+\subsection{Learning Literature}
+\frame
+{
+  \ft{Literature: Least Squares Learning}
+  \small{
+  \uncover<+->{
+  \begin{block}{Prolonged Inflation and Volatility}
+    \bi
+    \item<.-> Learning can lead to prolonged periods of inflation (Orphanides and Williams, 2005a)
+    \item<.-> Learning explains the run-up of inflation and volatility in the 1970s (Orphanides and Williams, 2005b), ...
+    \item<.-> ... and subsequent stability starting in mid-1980s (Primiceri, 2006) 
+    \ei
+  \end{block}
+  }
+
+  \uncover<+->{
+  \begin{block}{Business Cycle Dynamics}
+    \bi
+    \item<.-> Learning explains prolonged economic downturns and larger bubbles (Eusepi and Preston, 2011) 
+    \item<.-> Learning explains different-sized economic downturns and upswings (Milani, 2009)
+    \item<.-> Expectations significant cause for business cycles (Milani, 2011)
+    \ei
+  \end{block}
+  }
+}
+}
+
+\section{Unemployment}
+\frame
+{
+  \ft{Need for More Research: Unemployment}
+  \uncover<+->{
+  \begin{block}{Aforementioned papers ignore unemployment}
+    \bi
+    \item<+-> Expectations about unemployment influence economy.
+    \item<+-> Including data on unemployment can affect results (Gertler, Sala, and Trigari, 2008)
+    \item<+-> Current (very prolonged) unemployment situation.
+    \ei
+  \end{block}
+  }
+
+  \uncover<+->{
+  \begin{block}{Existing Unemployment (Macroeconometrics) Literature}
+    \bi
+    \item<+-> Blanchard and Gali (2010): Pioneer work modeling unemployment in macroeconometrics literature.
+    \item<+-> Existing work focuses on monetary policy (Thomas, 2008;  Blanchard and Gali, 2010)
+    \item<+-> Existing work does not explore implications for business cycles.
+    \item<+-> Existing work assumes \textit{rational expectations}.
+    \ei
+  \end{block}
+  }
+}
+
+\section{}
+\subsection{Research Project Outcomes}
+\frame
+{
+  \ft{Research Project Outcomes}
+
+  \footnotesize{
+  \uncover<+->{
+  \begin{block}{Outcomes: Answers to the following questions}
+    \be
+    \item Do expectations influence how long unemployment lasts, and how deep the unemployment problem becomes?
+    \item Do expectations help explain why some unemployment episodes are brief, while others are long?
+    \item Can government policy effectively reduce unemployment?  Under what conditions is this more likely?   
+    \item What economic shocks are responsible for U.S. business cycle fluctuations?  
+    \ee
+  \end{block}
+  }
+
+  \uncover<+->{
+  \begin{block}{Personal Growth}
+    \bi
+    \item This is related to my 2008 Ph.D. dissertation.
+    \item Part of a research program I am starting to build.
+    \item Likely to lead to more projects in this field.  Eg: Expectations about future government actions and unemployment.
+    \ei
+  \end{block}
+  }
+  }
+}
+
+
+\end{document}
+
